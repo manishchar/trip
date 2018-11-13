@@ -52,10 +52,28 @@
 									<p>
 										Kilimanjaro, Tanzania
 									</p>
+									<p>
+										<?php 
+						//echo $row->trip_start_date;			 
+						//echo "<br/>";
+						//echo $row->trip_end_date;			 
+	$date1 = new DateTime($row->trip_start_date);
+	$date2 = new DateTime($row->trip_end_date);
+//echo "<br/>";
+	// this calculates the diff between two dates, which is the number of nights
+	//echo $numberOfNights= date_diff($date1,$date2); 
+$adate=$row->trip_start_date;
+$ddate =$row->trip_end_date;
+$diff = strtotime($ddate) - strtotime( $adate);
+//echo  round(($diff / 86400) + 0.5);
+
+	//echo $numberOfNights= $date2->diff($date1)->format("%a"); 
+										 ?>
+									</p>
 									<ul class="package-list">
 										<li class="d-flex justify-content-between align-items-center">
 											<span>Duration</span>
-											<span>06 days and 5 nights</span>
+											<span><?=round(($diff / 86400) + 0.5);?> days </span>
 										</li>
 										
 										<li class="d-flex justify-content-between align-items-center">

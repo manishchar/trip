@@ -1,12 +1,13 @@
+			<?php include('header.php'); ?>
 			<section class="relative about-banner">	
 				<div class="overlay overlay-bg"></div>
 				<div class="container">				
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
 							<h1 class="text-white">
-								My Profile				
+								Change Password				
 							</h1>	
-							<p class="text-white link-nav"><a href="<?php echo base_url()?>">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="<?php echo site_url('User_booking/index')?>"> My Profile</a></p>
+							<p class="text-white link-nav"><a href="<?php echo base_url()?>">Home </a> <span class="lnr lnr-arrow-right"></span> <a href="<?php echo site_url('User_booking/index')?>"> Change Password</a></p>
 						</div>	
 					</div>
 				</div>
@@ -26,7 +27,7 @@
 							<div class="col-lg-12 form-group">
         	                <div class="panel panel-default">
         	                	<div class="panel-heading" style="margin-bottom:20px;">
-								<h3 class="panel-title">My Profile</h3>
+								<h3 class="panel-title">Change Password</h3>
 								</div>
 								<div class="panel-body">
 									<?php if($this->session->flashdata('message')){?>
@@ -39,32 +40,27 @@
 								<form role="form" method="POST" >
 			    			<?php foreach($user_p as $user) { ?>
 							<div class="row">
-			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    				<div class="col-xs-12 col-sm-12 col-md-12">
 			    					<div class="form-group">
-			    						<label>First Name<span><?php echo form_error('first_name','<span class="text-danger">','</span>') ?></span></label>
-			                <input type="text" name="first_name" id="first_name" value="<?php echo $user->first_name?>" class="form-control input-sm" placeholder="First Name">
+			    						<label>Old Password<span><?php echo form_error('old_password','<span class="text-danger">','</span>') ?></span></label>
+			                <input type="text" name="old_password" id="old_password" class="form-control input-sm" placeholder="Old Password" required="">
 			    					</div>
 			    				</div>
-			    				<div class="col-xs-6 col-sm-6 col-md-6">
-			    					<label>Last Name<span><?php echo form_error('last_name','<span class="text-danger">','</span>') ?></span></label>
+			    				<div class="col-xs-12 col-sm-12 col-md-12">
+			    					<label>New Password<span><?php echo form_error('password','<span class="text-danger">','</span>') ?></span></label>
 			    					<div class="form-group">
-							<input type="text" name="last_name" id="last_name" value="<?php echo $user->last_name ;?>" class="form-control input-sm" placeholder="Last Name">
+							<input type="text" name="password" id="password" class="form-control input-sm" placeholder="Password" required="">
 			    					</div>
 			    				</div>
 			    			</div>
                              <div class="row">
-							 <div class="col-xs col-sm-6 col-md-6">
-							 	<label>Email<span><?php echo form_error('email','<span class="text-danger">','</span>') ?></span></label>
+							 <div class="col-xs-12 col-sm-12 col-md-12">
+							 	<label>Confirm Password<span><?php echo form_error('cpassword','<span class="text-danger">','</span>') ?></span></label>
 			    			<div class="form-group">
-			    				<input type="email" name="email" id="email" value="<?php echo $user->email ;?>" class="form-control input-sm" placeholder="Email Address">
+			    				<input type="text" name="cpassword" id="cpassword" class="form-control input-sm" placeholder="Confirm Password" required="">
 			    			   </div>
 							</div>
-							<div class="col-xs-6 col-sm-6 col-md-6">
-								<label>Mobile<span><?php echo form_error('mobile','<span class="text-danger">','</span>') ?></span></label>
-							<div class ="form-group">
-							  <input type="mobile" name="mobile" id="mobile" value="<?php echo $user->mobile ;?>" class="form-control input-sm" placeholder="Enter Mobile Number">
-							    </div>
-							  </div>
+							
 							</div>  
 							
 

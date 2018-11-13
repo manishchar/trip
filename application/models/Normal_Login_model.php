@@ -10,6 +10,7 @@ class Normal_Login_model extends CI_Model {
 public function SaveData($data)
 {
     return $this->db->insert('user_login', $data);
+    
 }
 public function tdata($email,$password)
 {

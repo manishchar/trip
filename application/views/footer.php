@@ -54,6 +54,7 @@
 			<!-- End footer Area -->	
 
 			<script src="<?php echo base_url()?>assets/js/vendor/jquery-2.2.4.min.js"></script>
+			<script src="<?php echo base_url()?>assets/js/jquery-ui.js"></script>
 			<script src="<?php echo base_url()?>assets/js/popper.min.js"></script>
 			<script src="<?php echo base_url()?>assets/js/vendor/bootstrap.min.js"></script>			
 			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>		
@@ -87,6 +88,62 @@
         }
     });
     
+});
+
+
+function dateDiff(start,end){
+    days = (end- start) / (1000 * 60 * 60 * 24);
+    return Math.round(days);
+}
+jQuery(document).ready(function($) {
+	//alert();
+	
+	var extraDayValue = $('#extraDayValue').val();
+	var trip_start_date = new Date($('#trip_start_date').val());
+	var trip_end_date = new Date($('#trip_end_date').val());
+	var extraDay = 1;
+	//alert($.datepicker.formatDate('DD, d MM, yy', new Date()));
+	$('.extra-day').click(function() {
+
+	var start_date = $('#start_date').html();
+	var end_date = $('#end_date').html();
+	var s_date = new Date(start_date);
+	var e_date = new Date(end_date);
+//var nextDate = ($.datepicker.formatDate('DD, d MM, yy', new Date(tomorrow.setDate(tomorrow.getDate() + 1))) );
+		//if(!$(this).hasClass('disabled')){
+		if(true){
+if($(this).attr('id') == "arrive-earlier"){
+
+	var nextDate = new Date(s_date.setDate(s_date.getDate() - 1));
+	$('#start_date').html($.datepicker.formatDate('DD, MM dd, yy',nextDate));
+	extraDay = (dateDiff(nextDate,trip_start_date));
+	//alert(start_date);
+}else if($(this).attr('id') == "arrive-later"){
+	var nextDate = new Date(s_date.setDate(s_date.getDate() + 1)); 
+	$('#start_date').html($.datepicker.formatDate('DD, MM dd, yy', nextDate));
+	extraDay = (dateDiff(nextDate,trip_start_date));
+	//alert(start_date);
+}else if($(this).attr('id') == "leave-earlier"){
+	var nextDate = new Date(e_date.setDate(e_date.getDate() - 1));
+	$('#end_date').html($.datepicker.formatDate('DD, MM dd, yy', nextDate));
+	extraDay = (dateDiff(trip_end_date,nextDate));
+	//alert(end_date);
+}else if($(this).attr('id') == "leave-later"){
+	var nextDate = new Date(e_date.setDate(e_date.getDate() + 1));
+	$('#end_date').html($.datepicker.formatDate('DD, MM dd, yy', nextDate));
+	extraDay = (dateDiff(trip_end_date,nextDate));
+	//alert(end_date);
+}
+			alert('extre = '+extraDay);
+			$('#extra_day').html(parseInt(extraDayValue)*parseInt(extraDay));	
+		}
+		
+	});
+
+	// $('.last').click(function(event) {
+	// 	var end_date = $('#end_date').html();
+	// 	alert(end_date);
+	// });
 });
 </script>
 		</body>

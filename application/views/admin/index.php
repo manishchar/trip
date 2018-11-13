@@ -29,8 +29,13 @@
 	<div class="container">
 	<div class="sin-w3-agile">
 		<h2>Sign In</h2>
-		<!-- <form  method="post"> -->
-			<?php echo form_open('Admin_controller/login');?>
+		<?php
+		if($this->session->flashdata('error')){ ?>
+<div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
+		<?php }
+		?>
+		<form  method="post" action="<?php echo base_url().'admin/login'; ?>">
+			<?php //echo form_open('admin/login');?>
 			<div class="email">
 				<span class="username">Email:</span>
 				<input type="text" name="email" class="name" placeholder="" required="">
@@ -46,7 +51,8 @@
 					<input type="submit" class="login" name="login" value="Sign In">
 			</div>
 			<div class="clearfix"></div>
-			<?php echo form_close();?>
+		</form>
+			<?php //echo form_close();?>
 		<!-- </form> -->
 				<div class="back">
 					<a href="<?php echo site_url('Wix_Controller/index');?>">Back to home</a>

@@ -41,25 +41,15 @@ function trip_show(){
    
 		$this->load->view('machame-6-day-trek',$data );
 	}
-	function book()
-	{
-
-   $this->load->view('header');
-		                           
-
-                $id = $this->uri->segment(3);
-         // print_r($id);
-         // die();
-           $course = $this->db->query ("select * from trip_table where id=".$id);
-
-
-
-            $data['trip']=$course->result();
-// print_r( $data);die();  
-
-   
-		$this->load->view('trip-book',$data );
-	}
+function book()
+{
+	$this->load->view('header');
+	$id = $this->uri->segment(3);
+	$course = $this->db->query ("select * from trip_table where id=".$id);
+	$data['trip']=$course->row();
+	$this->load->view('trip-book',$data );
+	$this->load->view('footer');
+}
 
 
 

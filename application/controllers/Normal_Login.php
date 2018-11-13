@@ -21,7 +21,7 @@ function index()
 
 function register()
 {
-	$this->form_validation->set_rules('first_name', 'First Name', 'required');
+$this->form_validation->set_rules('first_name', 'First Name', 'required');
 $this->form_validation->set_rules('last_name', 'Last Name', 'required');
 $this->form_validation->set_rules('password', 'Password Confirmation', 'required');
 $this->form_validation->set_rules('password_confirmation', 'Password Confirmation', 'required|matches[password]');
@@ -58,13 +58,14 @@ else
 			"last_name"=>$this->input->post('last_name'),
 			"mobile"=>$this->input->post('mobile'),
 			"email"=>$this->input->post('email'),
-				"password"=>md5($this->input->post('password')),
+			"password"=>md5($this->input->post('password')),
 			//"confirm_password"=>$this->input->post('confirm_password'),
 			);
 	if($savedata){		
 			
 		$this->load->model('Normal_Login_model');
-		$last_id = $this->Normal_Login_model->SaveData($savedata);
+		$this->Normal_Login_model->SaveData($savedata);
+		$last_id =$this->db->insert_id();
 		if($last_id){
 			$user=array(
 				'id'=>$last_id,

@@ -86,7 +86,7 @@
 
 	<script type="text/javascript">
 		function formSubmit(){
-alert();
+
 $('.myform').css('border','1px solid #ccc');
 		$.ajax({
 			url: "<?php echo base_url().'Normal_Login/register' ?>",

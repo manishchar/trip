@@ -92,7 +92,7 @@ return true;
 
 	<?php }?> 
 
-					<form  name="chngpwd" action="<?php echo site_url('Admin_Controller/change_password');?>" method="post" class="form-horizontal" onSubmit="return valid();">
+					<form  name="chngpwd" action="<?php echo base_url('admin/change_password');?>" method="post" class="form-horizontal" onSubmit="return valid();">
 
 						<div class="form-group">
 							<label class="col-md-2 control-label">Current Password</label>

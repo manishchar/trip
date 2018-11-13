@@ -55,10 +55,10 @@ public function trip_insert($trip_data){
                                        }
 
 function trip_save($id,$trip_save){
-                                  $this->db->where('id', $id);
-                                  $this->db->update('trip_table', $trip_save);
+  $this->db->where('id', $id);
+  return $this->db->update('trip_table', $trip_save);
 
-                                  }
+  }
 public function getUserData($id)
                                {
 	                              return $this->db->get_where('wix_db',array('id'=>$id))->result_array();
