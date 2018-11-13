@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 12, 2018 at 07:15 AM
+-- Generation Time: Nov 13, 2018 at 12:13 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.0.30
 
@@ -52928,12 +52928,30 @@ CREATE TABLE `trip_table` (
 --
 
 INSERT INTO `trip_table` (`id`, `trip_title`, `trip_description`, `trip_start_date`, `trip_end_date`, `start_place`, `end_place`, `trip_extra_date`, `extra_price`, `person_price`, `image`, `hotel_price`, `day_count`, `picup_price`, `drop_off_price`, `active`, `status`, `created_by`, `created_date`, `updated_date`) VALUES
-(1, 'delhi to bhopal', 'this is the awesome trips  ', '2018-11-10 00:00:00', '2018-11-17 00:00:00', NULL, NULL, 127, 0, '500', '57.jpg', 200, '1', 50, 50, 1, 1, 0, '2018-11-10 18:26:23', '0000-00-00 00:00:00'),
-(2, 'delhi to bhopal', '                        ', '2018-11-07 04:00:00', '2018-11-23 01:17:00', '2070', '2070', 0, 0, '500', NULL, 200, '', 0, 0, 1, 1, 0, '2018-11-10 20:13:23', '0000-00-00 00:00:00'),
-(3, 'indore to sagar', '                        ', '2018-11-21 09:30:00', '2018-11-22 09:30:00', '2229', '2408', 1, 0, '600', NULL, 0, '', 0, 0, 1, 1, 0, '2018-11-10 20:15:24', '0000-00-00 00:00:00'),
-(4, 'delhi to bhopal', '                        ', '2018-11-21 09:30:00', '2018-11-22 21:30:00', '2070', '2072', 1, 0, '500', NULL, 0, '', 0, 0, 1, 1, 0, '2018-11-10 20:19:51', '0000-00-00 00:00:00'),
+(1, 'delhi to bhopal', 'this is the awesome trips                                                                                                                                                  ', '2018-11-14 00:00:00', '2018-11-17 00:00:00', NULL, NULL, 1, 500, '500', '57.jpg', 200, '1', 50, 50, 1, 1, 0, '2018-11-10 18:26:23', '2018-11-12 20:19:19'),
+(4, 'delhi to bhopal', '                                           aaaaa                                                                             ', '2018-11-21 00:00:00', '2018-11-22 00:00:00', '2070', '2072', 1, 500, '500', '', 555, '', 0, 0, 1, 1, 0, '2018-11-10 20:19:51', '2018-11-12 20:45:31'),
 (5, 'manish', '                        ', '2018-11-11 01:00:00', '2018-11-12 23:55:00', '2070', '0', 0, 0, '500', NULL, 0, '', 0, 0, 1, 1, 0, '2018-11-10 20:32:10', '2018-11-10 20:33:23'),
-(6, 'delhi to bhopal', 'this is the awesome trips                         ', '2018-11-07 08:00:00', '2018-11-13 20:00:00', '2070', '2070', 1, 200, '500', NULL, 100, '0', 50, 50, 1, 1, 0, '2018-11-11 09:48:53', '0000-00-00 00:00:00');
+(6, 'delhi to bhopal', 'this is the awesome trips                         ', '2018-11-07 08:00:00', '2018-11-13 20:00:00', '2070', '2070', 1, 200, '500', NULL, 100, '0', 50, 50, 1, 1, 0, '2018-11-11 09:48:53', '0000-00-00 00:00:00'),
+(7, 'new trip', 'this is the new trip', '2018-11-12 17:00:00', '2018-11-28 19:26:00', '2070', '2071', 1, 100, '800', NULL, 200, '0', 50, 50, 1, 1, 0, '2018-11-12 13:57:01', '0000-00-00 00:00:00'),
+(8, 'sxas', '10                        ', '2018-11-12 22:47:00', '2018-11-12 22:47:00', '2070', '2070', 1, 233, '256', NULL, 10, '10', 10, 10, 1, 1, 0, '2018-11-12 17:17:29', '0000-00-00 00:00:00'),
+(9, 'manish', 'ss                        ', '2018-11-14 04:00:00', '2018-11-30 09:00:00', '2070', '2071', 1, 500, '300', NULL, 500, '0', 0, 0, 1, 1, 0, '2018-11-12 20:22:07', '0000-00-00 00:00:00'),
+(10, 'delhi to bhopal', '                        ', '2018-11-14 02:33:00', '2018-11-15 02:33:00', '2070', '2071', 1, 500, '522', NULL, 0, '', 0, 0, 1, 1, 0, '2018-11-12 21:03:30', '0000-00-00 00:00:00'),
+(11, 'saa', '10                        ', '2018-11-21 00:00:00', '2018-11-15 00:00:00', '2070', '2070', 1, 123, '234', '69abb7013f413f545fd20f13eb6e7a451.jpg', 10, '10', 10, 1, 1, 1, 0, '2018-11-12 21:04:13', '2018-11-12 21:09:56'),
+(12, '22', '10                        ', '2018-11-07 08:00:00', '2018-11-23 01:17:00', '2070', '2070', 1, 10, '10', '.jpg', 10, '10', 10, 10, 1, 1, 0, '2018-11-12 21:07:28', '0000-00-00 00:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_booking`
+--
+
+CREATE TABLE `user_booking` (
+  `id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  `trip_id` int(11) NOT NULL,
+  `paid_amount` double(25,5) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -52955,32 +52973,29 @@ CREATE TABLE `user_login` (
 --
 
 INSERT INTO `user_login` (`id`, `first_name`, `last_name`, `mobile`, `email`, `password`) VALUES
-(1, 'arvind', 'lodhi', '9993967305', 'adlodhi10061995@gmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
-(2, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(3, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(4, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(5, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(6, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(7, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(8, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(9, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(10, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(11, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(12, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(13, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(14, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(15, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(16, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(17, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(18, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(19, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(20, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(21, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(22, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(23, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(24, '', '', '', '', 'd41d8cd98f00b204e9800998ecf8427e'),
-(25, 'manish', 'chakravarti', '9926331375', 'manish09.chakravarti@gmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
-(26, 'manish', 'chakravarti', '956854451', 'manish99.chakravarti@gmail.com', 'e10adc3949ba59abbe56e057f20f883e');
+(1, 'test', 'test', '9856955665', 'test@gmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
+(2, 'test', 'test', '9856985674', 'test1@gmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
+(3, 'test', 'test', '9856985674', 'test3@gmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
+(4, 'test', 'test', '123456', 'test4@gmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
+(5, 'test', 'test', '123456', 'test5@gmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
+(6, 'test', 'test', '123456', 'test6@gmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
+(7, 'test', 'test', '123456', 'test33@gmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
+(8, 'test', 'test', '123456', 'test332@gmail.com', 'e10adc3949ba59abbe56e057f20f883e'),
+(9, 'test', 'test new', '123456', 'test3326@gmail.com', 'c56d0e9a7ccec67b4ea131655038d604');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_payment_history`
+--
+
+CREATE TABLE `user_payment_history` (
+  `id` int(11) NOT NULL,
+  `payment_id` int(11) NOT NULL,
+  `trip_id` int(11) NOT NULL,
+  `paid_amount` double(25,5) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -53035,9 +53050,21 @@ ALTER TABLE `trip_table`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `user_booking`
+--
+ALTER TABLE `user_booking`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user_login`
 --
 ALTER TABLE `user_login`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user_payment_history`
+--
+ALTER TABLE `user_payment_history`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -53090,13 +53117,25 @@ ALTER TABLE `states`
 -- AUTO_INCREMENT for table `trip_table`
 --
 ALTER TABLE `trip_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `user_booking`
+--
+ALTER TABLE `user_booking`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `user_payment_history`
+--
+ALTER TABLE `user_payment_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
