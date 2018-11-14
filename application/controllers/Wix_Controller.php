@@ -5,8 +5,8 @@ class Wix_Controller extends CI_Controller {
 
 	public function index()
 	{
-		$query= $this->db->query('select * from trip_table');
-      $all['trip'] =$query->result();
+		$all['trip'] = $this->db->select('tab1.*,tab2.name')->join('categories as tab2','tab1.category_id=tab2.id')->get('trip_table as tab1')->result();
+       
 		$this->load->view('header',$all);
 
      	$this->load->view('index');

@@ -63,7 +63,21 @@
                        
 
                         <div class="col-lg-12 form-group">
-                         
+                          <div class="col-lg-4">
+                              <label for="end_date"><b>Category</b></label>
+                              <select class="form-control select2" name="category_id" required="">
+                                <option value="0">Select Category</option>
+                                <?php
+                                  if($categories){
+                                    foreach ($categories as $key => $category) { ?>
+                                      <option value="<?= $category->id; ?>"
+<?php if($trip->category_id == $category->id){ echo 'selected'; } ?>
+                                      ><?= $category->name; ?></option>
+                                    <?php }
+                                  }
+                                ?>
+                              </select>
+                          </div> 
                           <div class="col-lg-4">
                               <label for="start_date">Start Date
                                 <span><?php echo form_error('start_date', '<span class="text-danger">', '</span>'); ?></span>
@@ -87,23 +101,11 @@
                                 </span>
                               </div>
                           </div>
-                          <div class="col-lg-4">
-                           <label for="price" ">Per Persion price
-                            <span><?php echo form_error('price', '<span class="text-danger">', '</span>'); ?></span>
-                           </label>
-                           <input type="price" name="price" id="price"  placeholder="Per Person price" class="form-control" value="<?php echo $trip->person_price; ?>" >
-                        </div>
+                          
                         </div>
                          
-                      <div class="col-lg-12 form-group">  
-                        <div class="col-lg-4"> 
-                          <label for="extra_date">Extra Date</label>
-                          <input type="radio" name="extra_date" value="1" <?php if($trip->trip_extra_date == '1'){ echo "checked"; } ?> > Yes
-                          <input type="radio" name="extra_date" value="0" <?php if($trip->trip_extra_date == '0'){ echo "checked"; } ?>  > No
-                          <input type="text" class="form-control" name="extra_price" placeholder="extra day price" value="<?php echo $trip->extra_price; ?>">
-                        </div>  
-                        
-                        <div class="col-lg-6">
+                      <div class="col-lg-12 form-group">
+                        <div class="col-lg-4">
                           <div class="col-lg-12">
                             <label for="trip_file">Feature Image</label>
                           </div>
@@ -114,7 +116,20 @@
                             <input type="hidden" name="old_image" value="<?php echo $trip->image; ?>" >
                             <input type="file" name="trip_file">
                           </div>
+                        </div>  
+                        <div class="col-lg-4"> 
+                          <label for="extra_date">Extra Date</label>
+                          <input type="radio" name="extra_date" value="1" <?php if($trip->trip_extra_date == '1'){ echo "checked"; } ?> > Yes
+                          <input type="radio" name="extra_date" value="0" <?php if($trip->trip_extra_date == '0'){ echo "checked"; } ?>  > No
+                          <input type="text" class="form-control" name="extra_price" placeholder="extra day price" value="<?php echo $trip->extra_price; ?>">
+                        </div>  
+                        <div class="col-lg-4">
+                           <label for="price" ">Per Persion price
+                            <span><?php echo form_error('price', '<span class="text-danger">', '</span>'); ?></span>
+                           </label>
+                           <input type="price" name="price" id="price"  placeholder="Per Person price" class="form-control" value="<?php echo $trip->person_price; ?>" >
                         </div>
+                        
                       </div> 
                       <div class="col-lg-4 form-group" >
                         <label for="hotel_price" ">Hotel room with price</label>

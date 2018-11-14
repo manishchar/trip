@@ -3,10 +3,18 @@
 				<div class="container">				
 					<div class="row d-flex align-items-center justify-content-center">
 						<div class="about-content col-lg-12">
+						<?php
+$date1 = new DateTime($row->trip_start_date);
+$date2 = new DateTime($row->trip_end_date);
+$adate=$row->trip_start_date;
+$ddate =$row->trip_end_date;
+$diff = strtotime($ddate) - strtotime( $adate);
+$duration = round(($diff / 86400) + 0.5);
+										?>
 							<h1 class="text-white">
-								Machame 6 Day Trek				
+								<?= $trip->trip_title.' '.$duration.' Day'; ?>				
 							</h1>	
-							<p class="text-white link-nav"><a href="<?php echo base_url()?>">Home </a>  <span class="lnr lnr-arrow-right"></span>Machame 6 Day Trek <span class="lnr lnr-arrow-right"></span> <a href="#"> Machame 6 Day Trek</a></p>
+							<p class="text-white link-nav"><a href="<?php echo base_url()?>">Home </a>  <span class="lnr lnr-arrow-right"></span><?= $trip->name; ?> <span class="lnr lnr-arrow-right"></span> <a href="#"> <?= $trip->trip_title; ?></a></p>
 						</div>	
 					</div>
 				</div>
@@ -42,11 +50,11 @@
 										</li>
 										<li class="d-flex justify-content-between align-items-center">
 											<span>Airport Pickup</span>
-											<span id="pickup">0.00</span>
+											<span id="pickup">$<?= $trip->picup_price;?></span>
 										</li>
 										<li class="d-flex justify-content-between align-items-center">
 											<span>Departure Transfer</span>
-											<span id="transfer">0.00</span>
+											<span id="transfer">$<?= $trip->drop_off_price;?></span>
 										</li>
 										<li class="d-flex justify-content-between align-items-center">
 											<span>Extra</span>
@@ -64,7 +72,7 @@
 
                                        <li class="d-flex justify-content-between align-items-center" style="margin-top:20px;">
 											
-											<p class="price-btn primary-btn" style="background:#000000; width:100%; text-align:center;">Total $21288.00</p>
+											<p class="price-btn primary-btn" style="background:#000000; width:100%; text-align:center;">Total $<span id="grandTotal">21288.00</span></p>
 										</li>										
 									</ul>
 								</div>
@@ -121,6 +129,21 @@
 									    </div>
 									    <input type="submit" value="Search" class="genric-btn primary circle">
 									</div>
+
+									<div class="row">
+										<div class="col-md-8">
+										<h3 class="mt-20 mb-20">Flight </h3>
+										</div>
+										<div class="col-md-4">
+										<div class="sub-price"><span><input type="checkbox" id="flight-transfer-choice">
+										<label for="flight-transfer-choice">$<?= $trip->picup_price?><small> ($<?= $trip->picup_price?> per traveller)</small></label>
+										</span></div>
+										</div>
+										<p>
+										Flight data</p>
+
+										</div>
+
 									<?php if($trip->picup_price !='' && $trip->picup_price !='0'){ ?> 
 									<div class="row">
 										<div class="col-md-8">
@@ -145,8 +168,8 @@
 										<h3 class="mt-20 mb-20">Airport Drop-off</h3>
 										</div>
 										<div class="col-md-4">
-										<div class="sub-price"><span><input type="checkbox" id="arrival-transfer-choice" checked="">
-										<label for="arrival-transfer-choice">$<?= $trip->drop_off_price?><small> ($<?= $trip->drop_off_price?> per traveller)</small></label>
+										<div class="sub-price"><span><input type="checkbox" id="drop-transfer-choice" checked="">
+										<label for="drop-transfer-choice">$<?= $trip->drop_off_price?><small> ($<?= $trip->drop_off_price?> per traveller)</small></label>
 										</span></div>
 										</div>
 											<p>Book an airport pickup in advance and be met at the airport arrivals area. Just look for a G Adventures sign with your name on it.</p>
@@ -161,7 +184,7 @@
 			<h3 class="mt-20 mb-20">Extra Days</h3>
 		</div>
 	    <div class="content content-mobile">
-	    	<p> Want to spend some extra time in <strong>Moshi</strong>? Choose your arrival and departure dates.</p>
+	    	<p id="extraMessage"> Want to spend some extra time in <strong>Moshi</strong>? Choose your arrival and departure dates.</p>
 	    	<div id="extra-dates">
 	    		<div id="start-controls" class="row-fluid">
 	    			<label class="pull-left">Arrive:</label>
@@ -198,8 +221,8 @@
 		<div class="col-md-4">
 			<div class="sub-price">
 				<span>
-					<input type="checkbox" id="arrival-transfer-choice" checked="">
-					<label for="arrival-transfer-choice">$<?= $trip->extra_price?></label>
+					<input type="checkbox" id="hotel-extra-price">
+					<label for="hotel-extra-price">$<?= $trip->extra_price?></label>
 				</span>
 			</div>
 		</div>
@@ -208,7 +231,7 @@
 
 
 									
-									<div class="row">
+									<!-- <div class="row">
 										<div class="col-md-8">
 										<h3 class="mt-20 mb-20">Extra</h3>
 										</div>
@@ -221,7 +244,7 @@
 
                                     		<p>Haven't booked your flights yet? No problem. You can always book a pickup and send us the details later up to 30 days before the start of your tour.</p>
 									</div>
-									
+									 -->
 
 									<!-- <div class="row">
 										<div class="col-md-8">
@@ -241,14 +264,14 @@
 									    <div class="row">
 										<div class="col-md-12"><h3 class="mt-20 mb-20">Checkout</h3></div>
 										<div class="col-md-6">
-										<a href="checkout.php" class="genric-btn primary">Confirm and book</a>
+										<a href="javascript:void(0)" class="genric-btn primary" onclick="saveTrip(1)">Confirm and book</a>
 										<p>Payment required</p>
 										
 										</p>As of right now, there’s still space on this departure. 
 										If you would like to confirm your booking, reserve your spot now.</p>
 										</div>
 										<div class="col-md-6">
-											<input type="submit" class="genric-btn primary" name="save" value="Save my space">
+											<input type="button" class="genric-btn primary" name="save" onclick="saveTrip(2)" value="Save my space">
 											<p>Hold for 48 hours. No payment required</p>
 											
 											<p>If you would like to book this departure but need some time to confirm 
@@ -270,11 +293,32 @@
 					</div>
 				</div>	
 			</section>
+
+			<?php require_once('footer.php'); ?>
 			<!-- End post-content Area -->
+			<form id="tripFrom" onsubmit="return false;">
 <input type="text" name="" id="price" value="<?= $trip->person_price;?>">
+<input type="text" name="" id="tripId" value="<?= $trip->id;?>">
 <input type="text" name="" id="extraDayValue" value="<?= $trip->extra_price;?>">
 <input type="text" name="" id="trip_start_date" value="<?= $trip->trip_start_date;?>">
 <input type="text" name="" id="trip_end_date" value="<?= $trip->trip_end_date;?>">
+
+<input type="text" id="extraDay" name="extraDay" value="0">
+<input type="text" id="extraArriveDay" name="extraArriveDay" value="0">
+<input type="text" id="extraDepartureDay" name="extraDepartureDay" value="0">
+<input type="text" id="adult" name="adult" value="1">
+<input type="text" id="youth" name="youth" value="0">
+<input type="text" id="flightAmount" name="flightAmount" value="50">
+<input type="text" id="pickupAmount" name="pickupAmount" value="<?= $trip->picup_price;?>">
+<input type="text" id="dropAmount" name="dropAmount" value="<?= $trip->drop_off_price;?>">
+<input type="text" id="hotalAmount" name="hotalAmount" value="<?= $trip->extra_price;?>">
+
+<input type="text" class="total" id="flightTotal" name="flightTotal" value="0">
+<input type="text" class="total" id="pickupTotal" name="pickupTotal" value="0">
+<input type="text" class="total" id="dropTotal" name="dropTotal" value="0">
+<input type="text" class="total" id="hotalTotal" name="hotalTotal" value="0">
+<input type="text" class="total" id="tourTotal" name="tourTotal" value="0">
+</form>
 			<style type="text/css">
 				#extra-dates .date-adjust {
     -webkit-box-sizing: border-box;
@@ -327,6 +371,10 @@ div {
     background-repeat: no-repeat;
     background-position: left center;
 }
+#extra-dates .date-adjust strong:hover {
+    cursor: pointer;
+    /*background-position: left center;*/
+}
 
 strong {
     font-weight: bold;
@@ -337,12 +385,96 @@ strong, b {
 }
 			</style>
 <script type="text/javascript">
-	
+var base_url ="<?php echo base_url(); ?>";
+	function saveTrip(type){
+		alert(type);
+
+		$.ajax({
+        type: "POST",
+        url: base_url+"/Trip_Book/saveTrip",
+        data:$('#tripFrom').serialize(),
+        beforeSend(xhr){
+          //$('#recordSave').prop('disabled',true);
+          //$('#errorMessageForm').html('');
+            //alert('before');
+        },
+         success: function(result){
+            //alert(result);
+            console.log(result);
+              var obj = JSON.parse(result);
+             if(obj.status == 'success'){
+             	//alert('ssssssss');
+              window.location = base_url+'/Trip_Book/checkout_process';
+                //$('#recordSave').prop('disabled',true);
+                //$('#errorMessageForm').html('<span class="text text-success">'+obj.message+'</span>');
+              }
+             
+              
+            // //   $('#errorMessage').html('<span class="text text-success">'+obj.message+'</span>');
+            //   //location.reload();
+            //  }
+
+            //  if(obj.result == 'failed'){
+            //   $('#recordSave').prop('disabled',false);
+            //   // $('#recordSave').val('Save Record');  
+            //    $('#errorMessageForm').html('<span class="text text-danger">'+obj.message+'</span>');
+
+            //  }
+       
+       
+       
+         },error: function(data){
+              //  alert("error111");
+                console.log(data);
+            },complete: function(){
+                //alert('complete');
+               // $('#upload').val('Upload');
+               // $('#upload').prop('disabled',false);
+               // $('#saveLoader').hide();
+         }  
+    });
+return false;
+	}
+	$('#flight-transfer-choice').change(function(){
+		if($(this).prop('checked')){
+			$('#flight').html($(this).next().html());
+		}else{
+				$('#flight').html('0');
+		}
+		calculateValue();
+	});
+
+	$('#arrival-transfer-choice').change(function(){
+		if($(this).prop('checked')){
+			$('#pickup').html($(this).next().html());
+		}else{
+				$('#pickup').html('0');
+			}
+			calculateValue();
+	});
+
+	$('#drop-transfer-choice').change(function(){
+		if($(this).prop('checked')){
+			$('#transfer').html($(this).next().html());
+		}else{
+				$('#transfer').html('0');
+			}
+			calculateValue();
+	});
+	$('#hotel-extra-price').change(function(){
+			if($(this).prop('checked')){
+			
+			$('#extra_day').html($(this).next().html());
+			}else{
+				$('#extra_day').html('0');
+			}
+			calculateValue();
+		});
 
 	function personChange(obj){
 		var adult = $('#adult').val();
 		var youth = $('#youth').val();
-		var price = $('#price').val();
+		
 		var traveller = '';
 
 		if(adult !=0){
@@ -357,15 +489,140 @@ strong, b {
 				traveller += ", ";	
 			}
 			if(youth >1){
-			traveller += youth+" youths";
+				traveller += youth+" youths";
 			}else{
 				traveller += youth+" youth";
 			}
 		}
+		$('#traveller').html(traveller);
+		calculateValue();
+
+// 		var price = $('#price').val();
+// 		var flightAmount = parseInt($('#flightAmount').val());
+// 		var pickupAmount = parseInt($('#pickupAmount').val());
+// 		var dropAmount = parseInt($('#dropAmount').val());
+// 		var hotalAmount = parseInt($('#hotalAmount').val());
+// 		var extraDay = parseInt($('#extraDay').val());
+// 		var totalPerson = parseInt(adult)+parseInt(youth);
+// 		$('#tour').html('$'+totalPerson*price);
+// 		$('#tourTotal').val(totalPerson*price);
+// 		var flightTotal = totalPerson*flightAmount;
+// 		var flightMessage='$'+flightTotal+'($'+flightAmount+' per traveller)';
+// 		var pickupTotal = totalPerson*pickupAmount;
+// 		var pickupMessage='$'+pickupTotal+'($'+pickupAmount+' per traveller)';
+// 		var dropTotal = totalPerson*dropAmount;
+// 		var dropMessage='$'+pickupTotal+'($'+dropAmount+' per traveller)';
+// 		if(extraDay>0){
+// var hotalTotal = extraDay*(totalPerson*hotalAmount);
+// var hotalMessage='$'+hotalTotal+'($'+hotalAmount+' per traveller)';
+// 		}else{
+// var hotalTotal = totalPerson*hotalAmount;
+// var hotalMessage='$'+hotalTotal+'($'+hotalAmount+' per traveller)';
+// 		}
+		
+// 		$('#flight-transfer-choice').next().html(flightMessage);
+// 		if($('#flight-transfer-choice').prop('checked')){
+// 			$('#flightTotal').val(flightTotal);	
+// 			$('#flight').html(flightMessage);	
+// 		}	
+		
+// 		$('#arrival-transfer-choice').next().html(pickupMessage);
+// 		if($('#arrival-transfer-choice').prop('checked')){
+// 			$('#pickupTotal').val(pickupTotal);	
+// 			$('#pickup').html(pickupMessage);	
+// 		}
+
+		
+// 		$('#drop-transfer-choice').next().html(dropMessage);
+// 		if($('#drop-transfer-choice').prop('checked')){
+// 			$('#dropTotal').val(dropTotal);	
+// 			$('#transfer').html(dropMessage);	
+// 		}
+
+		
+// 		$('#hotel-extra-price').next().html(hotalMessage);
+// 		if($('#hotel-extra-price').prop('checked')){
+// 			$('#hotalTotal').val(hotalTotal);	
+// 			$('#extra_day').html(hotalMessage);	
+// 		}
+		
+// 		$('#adult').val(adult);
+// 		$('#youth').val(youth);
+		
+		//alert('e'+extraDay)
+	}
+	calculateValue();
+function calculateValue(){
+		var price = $('#price').val();
+		var adult = $('#adult').val();
+		var youth = $('#youth').val();
+		
+		var flightAmount = parseInt($('#flightAmount').val());
+		var pickupAmount = parseInt($('#pickupAmount').val());
+		var dropAmount = parseInt($('#dropAmount').val());
+		var hotalAmount = parseInt($('#hotalAmount').val());
+		var extraDay = parseInt($('#extraDay').val());
 		var totalPerson = parseInt(adult)+parseInt(youth);
 		$('#tour').html('$'+totalPerson*price);
-		$('#traveller').html(traveller);
+		$('#tourTotal').val(totalPerson*price);
+		var flightTotal = totalPerson*flightAmount;
+		var flightMessage='$'+flightTotal+'($'+flightAmount+' per traveller)';
+		var pickupTotal = totalPerson*pickupAmount;
+		var pickupMessage='$'+pickupTotal+'($'+pickupAmount+' per traveller)';
+		var dropTotal = totalPerson*dropAmount;
+		var dropMessage='$'+pickupTotal+'($'+dropAmount+' per traveller)';
+		if(extraDay>0){
+var hotalTotal = extraDay*(totalPerson*hotalAmount);
+var hotalMessage='$'+hotalTotal+'($'+hotalAmount+' per traveller)';
+		}else{
+var hotalTotal = totalPerson*hotalAmount;
+var hotalMessage='$'+hotalTotal+'($'+hotalAmount+' per traveller)';
+		}
 		
-	}
+		$('#flight-transfer-choice').next().html(flightMessage);
+		if($('#flight-transfer-choice').prop('checked')){
+			$('#flightTotal').val(flightTotal);	
+			$('#flight').html(flightMessage);	
+		}else{
+			$('#flightTotal').val(0);
+		}	
+		
+		$('#arrival-transfer-choice').next().html(pickupMessage);
+		if($('#arrival-transfer-choice').prop('checked')){
+			$('#pickupTotal').val(pickupTotal);	
+			$('#pickup').html(pickupMessage);	
+		}else{
+			$('#pickupTotal').val(0);
+		}
+
+		
+		$('#drop-transfer-choice').next().html(dropMessage);
+		if($('#drop-transfer-choice').prop('checked')){
+			$('#dropTotal').val(dropTotal);	
+			$('#transfer').html(dropMessage);	
+		}else{
+			$('#dropTotal').val(0);
+		}
+
+		
+		$('#hotel-extra-price').next().html(hotalMessage);
+		if($('#hotel-extra-price').prop('checked')){
+			$('#hotalTotal').val(hotalTotal);	
+			$('#extra_day').html(hotalMessage);	
+		}else{
+			$('#hotalTotal').val(0);
+		}
+		//$('#traveller').html(traveller);
+		$('#adult').val(adult);
+		$('#youth').val(youth);
+		calculateSum();
+}
+function calculateSum(){
+	var total = 0;
+		$('.total').each(function(){
+			total += parseInt($(this).val());
+		});
+		$('#grandTotal').html(total);
+}
 
 </script>

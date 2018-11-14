@@ -43,20 +43,20 @@
                        
 
                         <div class="col-lg-12 form-group">
-                          <div class="col-lg-3">
-                              <label for="end_date"><b>Start Place</b></label>
-                              <select class="form-control select2" name="start_place">
-                                <option value="0">Start Place</option>
+                          <div class="col-lg-4">
+                              <label for="end_date"><b>Category</b></label>
+                              <select class="form-control select2" name="category_id" required="">
+                                <option value="0">Select Category</option>
                                 <?php
-                                  if($cities){
-                                    foreach ($cities as $key => $city) { ?>
-                                      <option value="<?= $city->city_id; ?>"><?= $city->name; ?></option>
+                                  if($categories){
+                                    foreach ($categories as $key => $category) { ?>
+                                      <option value="<?= $category->id; ?>"><?= $category->name; ?></option>
                                     <?php }
                                   }
                                 ?>
                               </select>
                           </div> 
-                          <div class="col-lg-3">
+                          <div class="col-lg-4">
                               <label for="start_date">Start Date
                                 <span><?php echo form_error('start_date', '<span class="text-danger">', '</span>'); ?></span>
                               </label>
@@ -67,20 +67,8 @@
                                 </span>
                               </div>
                           </div>
-                          <div class="col-lg-3">
-                              <label for="end_date"><b>End Place</b></label>
-                              <select class="form-control select2" name="end_place">
-                                <option value="0">End Place</option>
-                                <?php
-                                  if($cities){
-                                    foreach ($cities as $key => $city) { ?>
-                                      <option value="<?= $city->city_id; ?>"><?= $city->name; ?></option>
-                                    <?php }
-                                  }
-                                ?>
-                              </select>
-                           </div>
-                           <div class="col-lg-3">
+                          
+                           <div class="col-lg-4">
                              <label for="end_date">End date
                               <span><?php echo form_error('end_date', '<span class="text-danger">', '</span>'); ?></span>
                              </label>
@@ -94,36 +82,36 @@
                         </div>
                          
                       <div class="col-lg-12 form-group">  
-                        <div class="col-lg-3"> 
+                        <div class="col-lg-4"> 
                           <label for="extra_date"><b>Extra Date</b></label>
                           <input type="radio" name="extra_date" value="1" checked=""> Yes
                           <input type="radio" name="extra_date" value="0"> No
                           <input type="text" class="form-control" name="extra_price" placeholder="extra day price">
                         </div>  
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                          <label for="price" ">Per Persion price
                           <span><?php echo form_error('price', '<span class="text-danger">', '</span>'); ?></span>
                          </label>
                          <input type="price" name="price" id="price"  placeholder="Per Person price" class="form-control " >
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                           <label for="file"><b>Feature Image</b></label>
                           <input type="file" name="trip_file"    class="form-control" >
                         </div>
                       </div> 
-                      <div class="col-lg-6 form-group" >
+                      <div class="col-lg-4 form-group" >
                         <label for="hotel_price" "><b>Hotel room with price</b></label>
                         <input type="hotel_price" name="hotel_price" id="hotel_price"  placeholder="hotel price" class="form-control " >
                       </div>
-                      <div class="col-lg-6 form-group">
+                      <!-- <div class="col-lg-3 form-group">
                         <label for="day count" "><b>Make every day count</b></label>
                         <input type="day_count" name="day_count" id="day_count"  placeholder="day count" class="form-control " >
-                      </div>
-                      <div class="col-lg-6 form-group">
+                      </div> -->
+                      <div class="col-lg-4 form-group">
                         <label for="Airport_pickup_price" "><b>Airport pickup with price</b></label>
                         <input type="Airport_pickup_price" name="Airport_pickup_price" id="Airport_pickup_price"  placeholder="Airport pickup price" class="form-control " >
                       </div>
-                      <div class="col-lg-6 form-group">
+                      <div class="col-lg-4 form-group">
                         <label for="Airport_drop_price" "><b>Airport Drop off with price</b></label>
                         <input type="Airport_drop_price" name="Airport_drop_price" id="Airport_drop_price"  placeholder="Airport drop price" class="form-control " >
                       </div>

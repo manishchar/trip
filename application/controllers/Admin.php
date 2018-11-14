@@ -78,6 +78,7 @@ function add_trip(){
 	$data['title'] = 'Add Trip';
   $this->session->userdata('email'); 
   $data['cities'] = $this->db->where('active','1')->get('cities')->result();
+  $data['categories'] = $this->db->where('active','1')->get('categories')->result();
   if($this->input->post()){
     $this->form_validation->set_rules('trip_title', 'Title', 'required',array('required'=>'%s required'));
     $this->form_validation->set_rules('price', 'Price', 'required',array('required'=>'%s required'));
@@ -107,8 +108,7 @@ function add_trip(){
           'Trip_start_date'   =>date('Y-m-d H:i:s',strtotime($_POST['start_date'])),
           'Trip_end_date'     =>date('Y-m-d H:i:s',strtotime($_POST['end_date'])),
           'extra_price'       =>$_POST['extra_price'],
-          'start_place'       =>$_POST['start_place'],
-          'end_place'         =>$_POST['end_place'],
+          'category_id'       =>$_POST['category_id'],
           'Trip_extra_date'   =>$this->input->post('extra_date'),
           'person_price'      =>$this->input->post('price'),
           'image'             =>$file_name,
@@ -117,6 +117,9 @@ function add_trip(){
           'picup_price'       =>$this->input->post('Airport_pickup_price'),
           'drop_off_price'    =>$this->input->post('Airport_drop_price'),
         );
+        // print_r($_POST);
+        // print_r($trip_data);
+        // die;
         if($trip_data){
         $this->load->model('Admin_model');
         $this->Admin_model->trip_insert($trip_data);
@@ -167,6 +170,7 @@ function add_trip(){
 		$id = $this->uri->segment(3);
 	  $course = $this->db->query ("select * from trip_table where id=".$id);
 	  $data['trip']=$course->row();
+    $data['categories'] = $this->db->where('active','1')->get('categories')->result();
 	if($this->input->post()){
 	    $this->form_validation->set_rules('trip_title', 'Title', 'required',array('required'=>'%s required'));
 	    $this->form_validation->set_rules('price', 'Price', 'required',array('required'=>'%s required'));
@@ -180,7 +184,7 @@ function add_trip(){
       {
       	$config['upload_path'] = './uploads/';
         $config['allowed_types'] = 'gif|jpg|png|jpeg';
-        //$config['file_name'] = $this->input->post('trip_file');
+        $config['file_name'] = $this->input->post('trip_file');
         $file_name = '';
         $this->load->library('upload', $config);
         if (!$this->upload->do_upload('trip_file'))
@@ -204,6 +208,7 @@ function add_trip(){
           'trip_description'  =>$this->input->post('trip_discription'),
           'Trip_start_date'   =>date('Y-m-d H:i:s',strtotime($_POST['start_date'])),
           'Trip_end_date'     =>date('Y-m-d H:i:s',strtotime($_POST['end_date'])),
+          'category_id'       =>$_POST['category_id'],
           'extra_price'       =>$_POST['extra_price'],
           'Trip_extra_date'   =>$this->input->post('extra_date'),
           'person_price'      =>$this->input->post('price'),

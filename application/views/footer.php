@@ -102,42 +102,83 @@ jQuery(document).ready(function($) {
 	var trip_start_date = new Date($('#trip_start_date').val());
 	var trip_end_date = new Date($('#trip_end_date').val());
 	var extraDay = 1;
+	var earliar = later =0;
+	
 	//alert($.datepicker.formatDate('DD, d MM, yy', new Date()));
 	$('.extra-day').click(function() {
+		var adult = $('#adult').val();
+		var youth = $('#youth').val();
+		var totalPerson = parseInt(adult)+parseInt(youth);
+		var start_date = $('#start_date').html();
+		var end_date = $('#end_date').html();
+		var s_date = new Date(start_date);
+		var e_date = new Date(end_date);
+var extraMessage ="Want to spend some extra time in <strong>Moshi</strong>? Choose your arrival and departure dates.";
+		//var nextDate = ($.datepicker.formatDate('DD, d MM, yy', new Date(tomorrow.setDate(tomorrow.getDate() + 1))) );
+		if(!$(this).hasClass('disabled')){
+		//if(true){
+			if($(this).attr('id') == "arrive-earlier"){
 
-	var start_date = $('#start_date').html();
-	var end_date = $('#end_date').html();
-	var s_date = new Date(start_date);
-	var e_date = new Date(end_date);
-//var nextDate = ($.datepicker.formatDate('DD, d MM, yy', new Date(tomorrow.setDate(tomorrow.getDate() + 1))) );
-		//if(!$(this).hasClass('disabled')){
-		if(true){
-if($(this).attr('id') == "arrive-earlier"){
+				var nextDate = new Date(s_date.setDate(s_date.getDate() - 1));
+				$('#start_date').html($.datepicker.formatDate('DD, MM dd, yy',nextDate));
+				earliar = parseInt((dateDiff(nextDate,trip_start_date)));
+				//alert(start_date);
+			}else if($(this).attr('id') == "arrive-later"){
+				var nextDate = new Date(s_date.setDate(s_date.getDate() + 1)); 
+				$('#start_date').html($.datepicker.formatDate('DD, MM dd, yy', nextDate));
+				earliar = parseInt((dateDiff(nextDate,trip_start_date)));
+				//alert(start_date);
+			}else if($(this).attr('id') == "leave-earlier"){
+				var nextDate = new Date(e_date.setDate(e_date.getDate() - 1));
+				$('#end_date').html($.datepicker.formatDate('DD, MM dd, yy', nextDate));
+				later = parseInt((dateDiff(trip_end_date,nextDate)));
+				//alert(end_date);
+			}else if($(this).attr('id') == "leave-later"){
+				var nextDate = new Date(e_date.setDate(e_date.getDate() + 1));
+				$('#end_date').html($.datepicker.formatDate('DD, MM dd, yy', nextDate));
+				later = parseInt((dateDiff(trip_end_date,nextDate)));
+				//alert(end_date);
+			}
 
-	var nextDate = new Date(s_date.setDate(s_date.getDate() - 1));
-	$('#start_date').html($.datepicker.formatDate('DD, MM dd, yy',nextDate));
-	extraDay = (dateDiff(nextDate,trip_start_date));
-	//alert(start_date);
-}else if($(this).attr('id') == "arrive-later"){
-	var nextDate = new Date(s_date.setDate(s_date.getDate() + 1)); 
-	$('#start_date').html($.datepicker.formatDate('DD, MM dd, yy', nextDate));
-	extraDay = (dateDiff(nextDate,trip_start_date));
-	//alert(start_date);
-}else if($(this).attr('id') == "leave-earlier"){
-	var nextDate = new Date(e_date.setDate(e_date.getDate() - 1));
-	$('#end_date').html($.datepicker.formatDate('DD, MM dd, yy', nextDate));
-	extraDay = (dateDiff(trip_end_date,nextDate));
-	//alert(end_date);
-}else if($(this).attr('id') == "leave-later"){
-	var nextDate = new Date(e_date.setDate(e_date.getDate() + 1));
-	$('#end_date').html($.datepicker.formatDate('DD, MM dd, yy', nextDate));
-	extraDay = (dateDiff(trip_end_date,nextDate));
-	//alert(end_date);
-}
-			alert('extre = '+extraDay);
-			$('#extra_day').html(parseInt(extraDayValue)*parseInt(extraDay));	
-		}
-		
+			extraDay = earliar +later;
+			
+			
+			//alert('earliar = '+extraDay+' later '+later);
+			var totalExtra = totalPerson*(parseInt(extraDayValue)*parseInt(extraDay));
+			if(extraDay >0){
+			var totalMessageLeft=totalMessageRight = '$'+totalExtra+'($'+extraDayValue+' per traveller)';
+				$('#hotel-extra-price').prop('checked',true);
+			}else{
+				var totalMessageLeft = '0';
+				var totalMessageRight = '$'+extraDayValue;
+				$('#hotel-extra-price').prop('checked',false);
+			}
+
+			$('#extraDay').val(extraDay);
+			$('#extraArriveDay').val(earliar);
+			$('#extraDepartureDay').val(later);
+			$('#hotel-extra-price').next().html(totalMessageRight);
+			$('#extra_day').html(totalMessageLeft);
+			$('#arrive-later').addClass('disabled');
+			$('#leave-earlier').addClass('disabled');
+				if(earliar > 0 && later >0){
+					//alert('both');
+					$('#arrive-later').removeClass('disabled');
+					$('#leave-earlier').removeClass('disabled');
+					extraMessage += " earliar : "+earliar+" and later : "+later;
+				}else if(later >0){
+					$('#leave-earlier').removeClass('disabled');
+					//alert('later');
+					extraMessage += " later : "+ later;
+				}else if(earliar >0){
+					
+					$('#arrive-later').removeClass('disabled');
+					//alert('earliar');
+					extraMessage += " earliar : "+earliar;
+				}
+				$('#extraMessage').html(extraMessage);
+				
+		}	
 	});
 
 	// $('.last').click(function(event) {

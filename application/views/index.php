@@ -45,12 +45,16 @@
 <div class="col-lg-4">
 							<div class="single-destinations">
 								<div class="thumb">
-									<img src="<?php echo base_url()?>assets/img/packages/d1.jpg" alt="">
+								<?php if($row->image!=''){?>
+									<img style="height: 150px;" src="<?php echo base_url().'uploads/'.$row->image; ?>" alt="">
+									<?php }else{ ?>
+									<img style="height: 150px;" src="<?php echo base_url()?>assets/img/packages/d2.jpg" alt="">
+									<?php } ?>
 								</div>
 								<div class="details">
 									<h4><?php echo $row->trip_title ?></h4>
 									<p>
-										Kilimanjaro, Tanzania
+										<?php echo $row->name; ?>
 									</p>
 									<p>
 										<?php 
@@ -59,12 +63,10 @@
 						//echo $row->trip_end_date;			 
 	$date1 = new DateTime($row->trip_start_date);
 	$date2 = new DateTime($row->trip_end_date);
-//echo "<br/>";
-	// this calculates the diff between two dates, which is the number of nights
-	//echo $numberOfNights= date_diff($date1,$date2); 
-$adate=$row->trip_start_date;
-$ddate =$row->trip_end_date;
-$diff = strtotime($ddate) - strtotime( $adate);
+	$adate=$row->trip_start_date;
+	$ddate =$row->trip_end_date;
+	$diff = strtotime($ddate) - strtotime( $adate);
+	$duration = round(($diff / 86400) + 0.5);
 //echo  round(($diff / 86400) + 0.5);
 
 	//echo $numberOfNights= $date2->diff($date1)->format("%a"); 
@@ -73,7 +75,7 @@ $diff = strtotime($ddate) - strtotime( $adate);
 									<ul class="package-list">
 										<li class="d-flex justify-content-between align-items-center">
 											<span>Duration</span>
-											<span><?=round(($diff / 86400) + 0.5);?> days </span>
+											<span><?= $duration;?> days </span>
 										</li>
 										
 										<li class="d-flex justify-content-between align-items-center">

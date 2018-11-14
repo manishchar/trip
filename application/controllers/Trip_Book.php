@@ -28,31 +28,66 @@ function trip_show(){
 
 		                           
 
-                $id = $this->uri->segment(3);
+          $id = $this->uri->segment(3);
          // print_r($id);
          // die();
-           $course = $this->db->query ("select * from trip_table where id=".$id);
+          // $course = $this->db->query ("select * from trip_table where id=".$id);
 
+$data['trip']= $this->db->select('tab1.*,tab2.name')->join('categories as tab2','tab1.category_id=tab2.id')->where('tab1.id',$id)->get('trip_table as tab1')->row();
 
-
-            $data['trip']=$course->result();
-// print_r( $data);die();  
-
+            
    
-		$this->load->view('machame-6-day-trek',$data );
+		$this->load->view('trip-detail',$data );
 	}
 function book()
 {
+	// print_r(empty($this->session->userdata('front')));
+	// die;
+	if(empty($this->session->userdata('front'))){
+		redirect(base_url('Wix_Controller/login'));
+	}
 	$this->load->view('header');
 	$id = $this->uri->segment(3);
-	$course = $this->db->query ("select * from trip_table where id=".$id);
-	$data['trip']=$course->row();
+	//$course = $this->db->query ("select * from trip_table where id=".$id);
+	//$data['trip']=$course->row();
+	$data['trip']= $this->db->select('tab1.*,tab2.name')->join('categories as tab2','tab1.category_id=tab2.id')->where('tab1.id',$id)->get('trip_table as tab1')->row();
 	$this->load->view('trip-book',$data );
-	$this->load->view('footer');
+	//$this->load->view('footer');
 }
 
 
 
+
+function saveTrip(){
+	$id = $this->session->userdata('front')['id'];
+	$booking = array(
+		'adult'=>$_POST['adult'],
+		'youth'=>$_POST['youth'],
+		'extraArriveDay'=>$_POST['extraArriveDay'],
+		'extraDepartureDay'=>$_POST['extraDepartureDay'],
+		'pickupAmount'=>$_POST['pickupAmount'],
+		'dropAmount'=>$_POST['dropAmount'],
+		'hotalAmount'=>$_POST['hotalAmount'],
+		'flightAmount'=>$_POST['flightAmount'],
+		'trip_id'=>$_POST['tourTotal'],
+		'tourAmount'=>$_POST['tourTotal'],
+		'total'=>$_POST['tourTotal'],
+		'booking_type'=>$_POST['tourTotal'],
+		'ctreated_by'=>$id,
+		);
+	//$response = array('status'=>"success");
+	if($this->db->insert('booking',$booking)){
+	$booking_id = $this->db->insert_id();
+	$response = array('status'=>"success",'booking_id'=>$booking_id);
+	}else{
+		$response = array('status'=>"failed");
+	}
+	 echo json_encode($response);
+}
+
+function checkout_process(){
+echo "Registration form";
+}
 function checkout()
 {
 	//echo '<pre />';
